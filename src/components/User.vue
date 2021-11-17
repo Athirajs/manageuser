@@ -48,15 +48,13 @@ export default {
     // console.log(data);
 
     localStorage.setItem("usersData", JSON.stringify(data.data.results));
-
-    // this.users = results;
+    let results = JSON.parse(localStorage.getItem("usersData"));
+    this.users = results;
     // console.warn(results, "results");
   },
   computed: {
     filteredList() {
-      let results = JSON.parse(localStorage.getItem("usersData"));
-
-      return results.filter((user) => {
+      return this.users.filter((user) => {
         return user.user.username.includes(this.search);
       });
     },
