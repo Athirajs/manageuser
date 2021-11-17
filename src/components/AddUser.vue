@@ -31,7 +31,7 @@
         <input type="text" placeholder="Phone" v-model="user.phone" />
       </div>
       <div class="login-button">
-        <button class="button" @click.prevent="login"><b>Log In</b></button>
+        <button class="button" @click.prevent="addUser"><b>Add User</b></button>
       </div>
     </form>
   </div>
@@ -58,11 +58,22 @@ export default {
     };
   },
   methods: {
-    login() {
-      console.log(this.user);
-      localStorage.setItem("usersData", JSON.stringify(this.user));
+    addUser() {
+      let users = [];
+      if (localStorage.getItem("newUser") === null) {
+        users = [];
+      } else {
+        users = JSON.parse(localStorage.getItem("newUser"));
+      }
+      users.push(this.user);
+      localStorage.setItem("newUser", JSON.stringify(users));
     },
   },
+  // watch: {
+  //   user(newUser) {
+  //     localStorage.newUser = newUser;
+  //   },
+  // },
 };
 </script>
 <style scoped>
